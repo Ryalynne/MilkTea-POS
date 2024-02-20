@@ -33,7 +33,6 @@ class registerController extends Controller
         return back();
     }
 
-
     public function register_ingredient(Request $request)
     {
         recipe_categories::create([
@@ -85,7 +84,7 @@ class registerController extends Controller
         }
 
         Product_Ingredients::create([
-            'ingredient_id' =>  $request->ingredientId,
+            'ingredient_id' =>  $request->recipe_id,
             'product_id' => $request->productId
         ]);
 

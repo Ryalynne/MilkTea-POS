@@ -133,7 +133,9 @@
                             class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full max-w-lg p-2.5 bg-white">
                             <option selected>-- What Ingredients --</option>
                             @foreach ($supplier as $item)
-                                <option value="{{ $item->recipe->recipe_name }} {{$item->unit->unit_name}} ₱{{$item->price}} ₱{{$item->volume}}">{{ $item->recipe->recipe_name }} ({{$item->unit->unit_name}})</option>
+                                <option
+                                    value="{{ $item->recipe->recipe_name }} {{ $item->unit->unit_name }} ₱{{ $item->price }} ₱{{ $item->volume }} ₱{{ $item->recipe_id }}">
+                                    {{ $item->recipe->recipe_name }} ({{ $item->unit->unit_name }})</option>
                             @endforeach
                         </select>
                     </div>
@@ -157,7 +159,7 @@
                     <div class="mb-6">
                         <label for="text" class="block mb-2 text-sm font-medium text-gray-900">SELLING
                             PRICE</label>
-                        <input name="Selling_Price" type="text" id="text"
+                        <input name="Selling_Price" type="number" id="priceInput"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             placeholder="Enter selling price (must be greater than cost price)" required />
                     </div>
@@ -168,5 +170,6 @@
         </div>
     </div>
     <script src="{{ asset('./javascript/register_java.js') }}"></script>
+    <script src="{{ asset('./javascript/numberonly_java.js') }}"></script>
     <script src="{{ asset('./javascript/text_area.js') }}"></script>
 </x-app-layout>
