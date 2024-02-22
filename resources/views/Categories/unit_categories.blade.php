@@ -53,6 +53,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        {{ $unit->links() }}
+                    </div>
                 </div>
             </div>
         </div>

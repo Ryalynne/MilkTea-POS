@@ -20,6 +20,11 @@ script.onload = function () {
             if (indexToRemove !== -1) {
                 recipe_ID.splice(indexToRemove, 1);
             }
+            const indexToRemove1 = product_ID.indexOf(tagText);
+            if (indexToRemove !== -1) {
+                product_ID.splice(indexToRemove1, 1);
+            }
+
             console.log(recipe_id);
             totalCost -= parseFloat(price)
             const costPriceInput = document.getElementById('disabled-input-2');
@@ -32,6 +37,9 @@ script.onload = function () {
     }
     let totalCost = 0;
     const recipe_ID = [];
+
+    const product_ID = [];
+
     newTagsInput.addEventListener('keyup', function (event) {
         if (event.key === ',') {
             const tags = newTagsInput.value.split(',');
@@ -54,10 +62,12 @@ script.onload = function () {
                     console.log("Value 3:", value3);
                     console.log("Value 4:", value4);
                     recipe_ID.push(value4);
+
                     console.log(recipe_ID);
                     tags.forEach(tag => {
                         const trimmedTag = tag.trim();
                         if (trimmedTag) {
+                            product_ID.push(trimmedTag);
                             // Ensure that parseFloat(value2) is correctly parsed
                             let expenses = parseFloat(value2) / parseInt(value3)
                             console.log("expenses:", expenses);
@@ -66,8 +76,15 @@ script.onload = function () {
                             const tagElement = createTag(trimmedTag, value1, currentTotal, value4);
                             console.log("Created tag element for:", trimmedTag);
                             console.log(tagElement);
+                     
+
+                            const recipo = document.getElementById('recipeID');
+                            recipo.value = recipe_ID;
+                            const trim = document.getElementById('unitvolume');
+                            trim.value = product_ID;
                             const costPriceInput = document.getElementById('disabled-input-2');
                             costPriceInput.value = totalCost.toFixed(2);
+                            
                             console.log("totalCost:", totalCost);
                             newTagsContainer.appendChild(tagElement);
                             newTagsInput.value = '';
@@ -81,7 +98,6 @@ script.onload = function () {
             }
         }
     });
-
 
     // newTagsInput.addEventListener('keyup', function (event) {
     //     if (event.key === ',') {

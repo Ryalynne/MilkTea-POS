@@ -47,8 +47,8 @@
                                     {{ __('Register Items') }}
                                 </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('Recipe-Volume')" :active="request()->routeIs('Recipe-Volume')">
-                                    {{ __('Recipe Volume') }}
+                                <x-dropdown-link :href="route('Ingredients-Volume')" :active="request()->routeIs('Ingredients-Volume')">
+                                    {{ __('Ingredients Volume') }}
                                 </x-dropdown-link>
 
                                 <!-- <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
@@ -102,10 +102,12 @@
                             </x-slot>
                         </x-dropdown>
                     </div>
-                    <x-nav-link :href="route('POS')" :active="request()->routeIs('POS')">
+                    <x-nav-link :href="route('Sales_Report', [
+                        'start_date' => now()->format('Y-m-d'),
+                        'end_date' => now()->format('Y-m-d'),
+                    ])" :active="request()->routeIs('Sales_Report')">
                         {{ __('Reports') }}
                     </x-nav-link>
-
                     <div class="hidden sm:flex sm:items-center sm:ms-6">
                         <x-dropdown align="left" width="48">
                             <x-slot name="trigger">
@@ -124,10 +126,10 @@
                                 </button>
                             </x-slot>
                             <x-slot name="content">
-                                <x-dropdown-link :href="route('Register-Item')" :active="request()->routeIs('Register-Item')">
+                                {{-- <x-dropdown-link :href="route('Register-Item')" :active="request()->routeIs('Register-Item')">
                                     {{ __('Sugar Level Settings') }}
-                                </x-dropdown-link>
-                                <x-dropdown-link :href="route('Register-Item')" :active="request()->routeIs('Register-Item')">
+                                </x-dropdown-link> --}}
+                                <x-dropdown-link :href="route('Account')" :active="request()->routeIs('Account')">
                                     {{ __('Accounts') }}
                                 </x-dropdown-link>
                             </x-slot>

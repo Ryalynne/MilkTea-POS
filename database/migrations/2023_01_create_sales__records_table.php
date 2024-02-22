@@ -15,17 +15,16 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('Or_id');
             $table->foreign('Or_id')->references('id')->on('o_r__lists');
-            $table->string('Customer_Name');
+            $table->string('Customer_Name')->nullable();
+            $table->string('Product_Name');
             $table->string('Qty');
-            $table->string('Product_id');
-            $table->string('Sugar');
-            $table->string('Add_on');
-            // $table->string('Discount');
-            $table->string('Cost_Price');
             $table->string('Unit_Price');
-            $table->string('Profit');
+            $table->string('Sugar');
+            $table->string('Topping')->nullable();
+            $table->string('Add_on')->nullable();
+            $table->string('Cost_Price');
             $table->string('Sub_Total');
-            $table->string('Total');
+            $table->string('Total')->nullable();
             $table->timestamps();
         });
     }

@@ -18,10 +18,15 @@ class sales_records extends Model
         'Add_on',
         'Cost_Price',
         'Unit_Price',
-        'Profit',
         'Sub_Total',
         'Total',
+        'Product_Name',
+        'Topping',
     ];
 
+    public function saleproduct()
+    {
+        return $this->belongsTo(OR_List::class, 'Or_id');
+    }
     
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ingredients_Table;
 use App\Models\recipe_categories;
 use Illuminate\Http\Request;
 

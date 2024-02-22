@@ -10,19 +10,19 @@ class OR_List extends Model
     use HasFactory;
 
     protected $fillable = [
-        'OrderNumber',
+        'OrNumber',
         'status',
     ];
 
     public function saleproduct()
     {
-        return $this->belongsTo(sales_records::class, 'OrNumber');
+        return $this->belongsTo(sales_records::class, 'Or_id');
     }
 
 
     public function productlist()
     {
-        return $this->belongsTo(Product_Table::class, 'Product_id');
+        return $this->belongsTo(product_tables::class, 'Product_id');
     }
 
 

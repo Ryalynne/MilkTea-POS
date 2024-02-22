@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Ingredient Categories') }}
+            {{ __('Account') }}
         </h2>
         @vite('resources/css/app.css')
     </x-slot>
@@ -33,7 +33,13 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Ingredient Name
+                                    User Name
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Email
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Type
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Action
@@ -41,11 +47,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($recipe as $item)
+                            @foreach ($account as $item)
                                 <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                        {{ $item->recipe_name }}
+                                        {{ $item->name }}
                                     </th>
+                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                                        {{ $item->email }}
+                                    </th>
+                                    <td>ADMIND</td>
                                     <td class="px-6 py-4">
                                         <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
                                     </td>
@@ -53,42 +63,35 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <div class="pagination">
-                        {{ $recipe->links() }}
-                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="myModal" class="hidden fixed inset-0 z-10 bg-gray-500 bg-opacity-75 flex justify-center items-center">
-        <div class="bg-white rounded-lg shadow-lg p-8 max-h-[800px] overflow-y-auto">
-            <!-- Added max-h-[400px] class for maximum height and overflow-y-auto -->
-            <form method="POST" action="{{ route('Insert-ingredient') }}">
-                @csrf
-                <div class="flex items-center justify-between w-full">
-                    <h3 class="text-lg font-bold leading-6 text-gray-900 mb-2">--------- REGISTER INGREDIENT
-                        ------------</h3>
-                    <button id="closeModal" type="button" class="text-gray-400 hover:text-gray-500 focus:outline-none">
-                        <span class="sr-only">Close</span>
-                        <!-- Heroicon name: outline/x -->
-                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="mb-6">
-                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900">INGREDIENT NAME</label>
-                    <input name="recipe_name" type="text" id="text"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                        placeholder="Name of the Brand" required />
-                </div>
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
-            </form>
+        <div id="myModal"
+            class="hidden fixed inset-0 z-10 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+            <div class="bg-white rounded-lg shadow-lg p-8 max-h-[800px] overflow-y-auto">
+                <!-- Added max-h-[400px] class for maximum height and overflow-y-auto -->
+                <form method="POST" action="{{ route('Insert-toppings') }}">
+                    @csrf
+                    <div class="flex items-center justify-between w-full">
+                        <h3 class="text-lg font-bold leading-6 text-gray-900 mb-2">--------- REGISTER TOPPINGS
+                            ------------</h3>
+                        <button id="closeModal" type="button"
+                            class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                            <span class="sr-only">Close</span>
+                            <!-- Heroicon name: outline/x -->
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                </form>
+            </div>
         </div>
-    </div>
     </div>
     <script src="{{ asset('./javascript/register_java.js') }}"></script>
 </x-app-layout>

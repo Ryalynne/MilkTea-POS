@@ -54,6 +54,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        {{ $brand->links() }}
+                    </div>
                 </div>
             </div>
         </div>

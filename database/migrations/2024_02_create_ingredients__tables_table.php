@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('ingredient_id');
             $table->foreign('ingredient_id')->references('id')->on('recipe_categories');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('product_tables');
             $table->string('Cost');
-            $table->string('Unit');
             $table->string('Volume');
             $table->timestamps();
         });

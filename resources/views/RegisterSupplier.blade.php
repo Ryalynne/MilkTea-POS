@@ -3,7 +3,8 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Register Supplier') }}
         </h2>
-        <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet">
+        {{-- <link href="{{ asset('resources/css/app.css') }}" rel="stylesheet"> --}}
+        @vite('resources/css/app.css')
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -34,7 +35,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Recipe Name
+                                    Ingredient Name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Brand
@@ -47,6 +48,9 @@
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Volume
+                                </th>
+                                <th scope="col" class="px-6 py-3">
+                                    Reorder lvl
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Price
@@ -68,24 +72,42 @@
                         <tbody>
                             @foreach ($categories as $category)
                                 <tr class="bg-white border-b">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                                    <th scope="row"
+                                        class="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $category->recipe->recipe_name }}
                                     </th>
-                                    <td>{{ $category->brand->brand_name }}</td>
-                                    <td>{{ $category->supplier->supplier_name }}</td>
-                                    <td>{{ $category->unit->unit_name }}</td>
-                                    <td>{{ $category->volume }}</td>
-                                    <td>{{ $category->price }}</td>
-                                    <td>{{ $category->pick_up_or_delivery }}</td>
-                                    <td>{{ $category->contact_number }}</td>
-                                    <td>{{ $category->contact_person }}</td>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                    <td class="border px-6 py-4">{{ $category->brand->brand_name }}</td>
+                                    <td class="border px-6 py-4">{{ $category->supplier->supplier_name }}</td>
+                                    <td class="border px-6 py-4">{{ $category->unit->unit_name }}</td>
+                                    <td class="border px-6 py-4">{{ $category->volume }}</td>
+                                    <td class="border px-6 py-4">{{ $category->reorder_lvl }}</td>
+                                    <td class="border px-6 py-4">{{ $category->price }}</td>
+                                    <td class="border px-6 py-4">{{ $category->pick_up_or_delivery }}</td>
+                                    <td class="border px-6 py-4">{{ $category->contact_number }}</td>
+                                    <td class="border px-6 py-4">{{ $category->contact_person }}</td>
+                                    <td class="border px-6 py-4">
+                                        <a href="#"
+                                            class="modalButtonUpdate font-medium text-blue-600 hover:underline edit-link"
+                                            data-id="{{ $category->id }}"
+                                            data-recipe_name="{{ $category->recipe->recipe_name }}"
+                                            data-brand_name="{{ $category->brand_id }}"
+                                            data-supplier_name="{{ $category->supplier_id }}"
+                                            data-unit_name="{{ $category->unit_id }}"
+                                            data-volume="{{ $category->volume }}" data-price="{{ $category->price }}"
+                                            data-reorder_lvl="{{ $category->reorder_lvl }}"
+                                            data-pick_up_or_delivery="{{ $category->pick_up_or_delivery }}"
+                                            data-contact_number="{{ $category->contact_number }}"
+                                            data-contact_person="{{ $category->contact_person }}">
+                                            Edit
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        {{ $categories->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -110,7 +132,8 @@
                         </button>
                     </div>
                     <div class="mb-6">
-                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">RECIPE NAME</label>
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">INGREDIENT
+                            NAME</label>
                         <select name="recipe_id" id="recipe"
                             class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
                             <option selected value="">-- Choose Brand --</option>
@@ -201,7 +224,133 @@
                 </form>
             </div>
         </div>
+
+
+        <div id="myModal1"
+            class="hidden fixed inset-0 z-10 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+            <div class="bg-white rounded-lg shadow-lg p-8 max-h-[800px] overflow-y-auto">
+                <!-- Added max-h-[400px] class for maximum height and overflow-y-auto -->
+                <form method="POST" action="{{ route('Update-Supply') }}">
+                    @csrf
+                    <div class="flex items-center justify-between w-full">
+                        <h3 class="text-lg font-bold leading-6 text-gray-900 mb-2">--------- UPDATE PRODUCT
+                            ------------</h3>
+                        <button id="closeModal1" type="button"
+                            class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                            <span class="sr-only">Close</span>
+                            <!-- Heroicon name: outline/x -->
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="mb-6">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">INGREDIENT
+                            NAME</label>
+                        <input name="recipe_id1" type="number" id="recipe_id1"
+                            class="hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="Enter recipe_id1" />
+                        <select name="recipe_id" id="recipe1"
+                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
+                            {{-- <option selected value="">-- Choose Brand --</option> --}}
+                            @foreach ($recipe as $recipelist)
+                                <option value="{{ $recipelist->id }}">{{ $recipelist->recipe_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">BRAND</label>
+                        <select name="brand_id" id="brand1"
+                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
+                            {{-- <option selected value="">-- Choose Brand --</option> --}}
+                            @foreach ($brand as $brandlist)
+                                <option value="{{ $brandlist->id }}">{{ $brandlist->brand_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">SUPPLIER</label>
+                        <select name="supplier_id" id="supplier1"
+                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
+                            {{-- <option selected value="">-- Choose Supplier --</option> --}}
+                            @foreach ($supplier as $suplierlistlist)
+                                <option value="{{ $suplierlistlist->id }}">{{ $suplierlistlist->supplier_name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">UNIT
+                            MEASUREMENT</label>
+                        <select name="unit_id" id="unit1"
+                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
+                            {{-- <option selected value="">-- Choose Unit --</option> --}}
+                            @foreach ($unit as $unitlist)
+                                <option value="{{ $unitlist->id }}">{{ $unitlist->unit_name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">REORDER
+                            LEVEL</label>
+                        <input name="reorder_lvl" type="number" id="Reoder_Level1"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="Enter Reoder Level" required />
+                    </div>
+                    <div class="mb-6">
+                        <label for="volume" class="block mb-2 text-sm font-medium text-gray-900">VOLUME BY
+                            ORDER</label>
+                        <input name="volume" type="number" id="volume1"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="Enter volume" required />
+                        <!-- <small id="volume_error" class="text-red-600"></small> -->
+                    </div>
+                    <div class="mb-6">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">PRICE</label>
+                        <input name="price" type="number" id="priceInput1"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="Enter price" required />
+                    </div>
+                    <div class="mb-6">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">PICK UP/
+                            DELIVERY</label>
+                        <select name="pick_up_or_delivery" id="pick_up_or_delivery1"
+                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
+                            {{-- <option selected>-- Choose Type --</option> --}}
+                            <option value="PICK UP">PICK UP</option>
+                            <option value="DELIVERY">DELIVERY</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="contact_number" class="block mb-2 text-sm font-medium text-gray-900">CONTACT
+                            NO.</label>
+                        <input name="contact_number" type="contact" id="contact_number1"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="+63" required />
+                    </div>
+                    <div class="mb-6">
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">CONTACT
+                            PERSON.</label>
+                        <input name="contact_person" type="text" id="contact_person"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="Name of Contact Person" required />
+                    </div>
+                    <div class="mb-6 hidden">
+                        <label for="remaining" class="block mb-2 text-sm font-medium text-gray-900">remaining BY
+                            ORDER</label>
+                        <input name="remaining" type="number" id="remaining1"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="Enter remaining" disabled />
+                    </div>
+                    <button type="submit"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Update</button>
+                </form>
+            </div>
+        </div>
     </div>
+    <script src="{{ asset('./javascript/update_java.js') }}"></script>
     <script src="{{ asset('./javascript/register_java.js') }}"></script>
     <script src="{{ asset('./javascript/numberonly_java.js') }}"></script>
 </x-app-layout>

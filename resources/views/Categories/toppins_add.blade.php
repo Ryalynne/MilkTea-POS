@@ -33,7 +33,7 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
-                                    Recipe Name
+                                    Ingredient Name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
                                     Add on
@@ -47,7 +47,10 @@
                             @foreach ($topping as $item)
                                 <tr class="bg-white border-b">
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                                        {{ $item->toppings_name }}
+                                        {{ $item->recipe->recipe_name }}
+                                    </th>
+                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                                        {{ $item->addOn }}
                                     </th>
                                     <td class="px-6 py-4">
                                         <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
@@ -56,6 +59,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="pagination">
+                        {{ $topping->links() }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -80,18 +86,23 @@
                         </button>
                     </div>
                     <div class="mb-6">
-                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">TOPPING NAME</label>
-                        <input name="toppings_name" type="text" id="text"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            placeholder="Name of the Brand" required />
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">INGREDIENT
+                            NAME</label>
+                        <select name="toppings_name"
+                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
+                            {{-- <option selected value="">-- Choose Brand --</option> --}}
+                            @foreach ($recipe as $recipelist)
+                                <option value="{{ $recipelist->id }}">{{ $recipelist->recipe_name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="mb-6">
-                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">CATEGORIES</label>
-                        <select name="Product_Cetegories" id="countries"
+                        <label for="text" class="block mb-2 text-sm font-medium text-gray-900">ADD ON</label>
+                        <select name="avail" id="countries"
                             class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
                             <option selected>-- Choose What Type of Categories --</option>
-                            <option value="1">ENABLED</option>
-                            <option value="2">DISABLED</option>
+                            <option value="ENABLED">ENABLED</option>
+                            <option value="DISABLED">DISABLED</option>
                         </select>
                     </div>
                     <button type="submit"

@@ -1,7 +1,13 @@
 try {
     // Select the submit button
     var submitButton = document.querySelector('button[type="submit"]');
+    var inputFields = document.getElementsByClassName('readonly');
 
+    // Loop through each input field with the class 'readonly'
+    for (var i = 0; i < inputFields.length; i++) {
+        // Set the readOnly attribute to true for each input field
+        inputFields[i].readOnly = true;
+    }
     document.getElementById("priceInput").addEventListener("input", function (event) {
         this.value = this.value.replace(/[eE]/g, "");
     });
@@ -27,6 +33,8 @@ try {
         }
     });
 
+
+    
     document.getElementById("volume").addEventListener("input", function (event) {
         this.value = this.value.replace(/[eE]/g, "");
     });

@@ -15,4 +15,15 @@ class product_tables extends Model
         'Product_Cetegories',
         'Selling_Price',
     ];
+
+
+    public function ingredients()
+    {
+        return $this->hasMany(ingredients_tables::class, 'product_id');
+    }
+
+    public function recipeCategory()
+    {
+        return $this->belongsTo(recipe_categories::class, 'ingredient_id');
+    }
 }

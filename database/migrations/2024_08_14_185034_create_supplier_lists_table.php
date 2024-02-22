@@ -30,6 +30,7 @@ return new class extends Migration
 
             $table->string('reorder_lvl');
             $table->string('volume');
+            $table->string('remaining')->default(0);
             $table->string('price');
             $table->string('pick_up_or_delivery');
             $table->string('contact_number');
