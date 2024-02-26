@@ -52,6 +52,7 @@ for (let i = 0; i < modalButtons.length; i++) {
                 break; // Once found, exit the loop
             }
         }
+        
         // Populate form fields with the retrieved data
         // recipeNameField.value = recipeName || '';
         recipe_id1.value = recipeID|| '';

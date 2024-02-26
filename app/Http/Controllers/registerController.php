@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\brand_categories;
-use App\Models\Ingredients_Table;
 use App\Models\ingredients_tables;
 use App\Models\OR_List;
-use App\Models\Product_Ingredients;
 use App\Models\product_tables;
 use App\Models\recipe_categories;
 use App\Models\sales_records;
@@ -45,6 +43,7 @@ class registerController extends Controller
         ]);
         return back();
     }
+    
     public function register_unit(Request $request)
     {
         unit_categories::create([
