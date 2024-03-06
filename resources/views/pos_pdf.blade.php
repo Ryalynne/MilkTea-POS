@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    <center><h1>MILKEZE</h1></center>
+    <center><h1>MILKIZE</h1></center>
     OR: {{ $sales[0]->saleproduct->OrNumber }} Date Printed: {{ now() }}
     <br>
     <table>
@@ -68,7 +68,7 @@
         </tbody>
     </table>
     <div class="mb-6">
-        <label for="discount" class="block mb-2 text-sm font-medium text-gray-900">Discount:</label>
+        <label for="discount" class="block mb-2 text-sm font-medium text-gray-900">Discount: {{$discount}}</label>
     </div>
 
     <div class="mb-6">

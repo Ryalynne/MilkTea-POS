@@ -27,6 +27,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/dashboard', [routeController::class, 'dashboard'])->name('dashboard');
     Route::get('/Register-Supplier', [routeController::class, 'Register_Supplier_route'])->name('Register-Supplier');
     Route::get('/Register-Item', [routeController::class, 'Register_Item_route'])->name('Register-Item');
+    Route::get('/Archived', [routeController::class, 'Register_Archived_route'])->name('Archived');
     Route::get('/Ingredients-Volume', [routeController::class, 'Ingredients_Volume_route'])->name('Ingredients-Volume');
     Route::get('/POS', [routeController::class, 'POS_route'])->name('POS');
     Route::get('/brand-categories', [routeController::class, 'brand_categories'])->name('brand-categories');
@@ -52,9 +53,16 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::post('/Insert-toppings', [registerController::class, 'register_toppings'])->name('Insert-toppings');
     Route::post('/Insert-supcategories', [registerController::class, 'register_supcategories'])->name('Insert-supcategories');
     Route::post('/Insert-Order', [registerController::class, 'registerOrder'])->name('Insert-Order');
+    Route::post('/Insert-User', [registerController::class, 'registerUser'])->name('Insert-User');
+    Route::post('/cancelOrder/{OR}', [updateController::class, 'cancelOrder'])->name('cancelOrder.order');
+    Route::post('/UpdateCategories', [updateController::class, 'UpdateCategories'])->name('Update-Categories');
+
     //Ajax
     Route::get('/find-recipe/{category}', [AjaxController::class,  'findRecipe'])->name('find-recipe');
     //uddate
+    Route::post('/updateUserType', [updateController::class, 'updateUserType'])->name('updateUserType');
+    Route::post('/updateItem', [updateController::class, 'updateItem'])->name('updateItem');
+
     Route::post('/Update-Supply', [updateController::class, 'updateSupplier'])->name('Update-Supply');
     Route::post('/Update-Volume', [updateController::class, 'updateVolume'])->name('Update-Volume');
 });

@@ -68,10 +68,24 @@ class routeController extends Controller
         $brand = brand_categories::get();
         $supplier = supplier_list::get();
         $product = recipe_categories::get();
-        $products = product_tables::with('ingredients.recipeCategory')->paginate(10);;
+        $products = product_tables::with('ingredients.recipeCategory')->where('status', '0')->paginate(10);;
 
         return view('RegisterItem', compact('productItem', 'unit', 'brand', 'supplier', 'product', 'products'));
     }
+
+    public function Register_Archived_route()
+    {
+        $productItem = product_tables::get();
+        $unit = unit_categories::get();
+        $brand = brand_categories::get();
+        $supplier = supplier_list::get();
+        $product = recipe_categories::get();
+        $products = product_tables::with('ingredients.recipeCategory')->where('status', '1')->paginate(10);;
+        return view('Archived', compact('productItem', 'unit', 'brand', 'supplier', 'product', 'products'));
+    }
+
+
+
 
     public function Ingredients_Volume_route()
     {
@@ -96,7 +110,7 @@ class routeController extends Controller
                 'ing.Cost',
                 'pt.id',
                 DB::raw('MIN(FLOOR(sl.remaining / ing.Volume)) AS num_products_can_be_made')
-            )
+            )->where('pt.status', '0')
             ->get();
 
         $sale = sales_records::join('o_r__lists', 'sales_records.Or_id', '=', 'o_r__lists.id')

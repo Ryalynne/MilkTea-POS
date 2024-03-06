@@ -14,6 +14,7 @@ class product_tables extends Model
         'Image',
         'Product_Cetegories',
         'Selling_Price',
+        'status',
     ];
 
 

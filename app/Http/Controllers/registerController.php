@@ -12,9 +12,12 @@ use App\Models\supplier_categories;
 use App\Models\supplier_list;
 use App\Models\topping;
 use App\Models\unit_categories;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 
 class registerController extends Controller
 {
@@ -43,7 +46,7 @@ class registerController extends Controller
         ]);
         return back();
     }
-    
+
     public function register_unit(Request $request)
     {
         unit_categories::create([
@@ -182,9 +185,9 @@ class registerController extends Controller
     {
         $ORR = OR_List::where('OrNumber', $OR)->value('id');
         $sales = sales_records::where('Or_id', $ORR)->get();
-        $discount = $request->input('discount');
-        $cash = $request->input('cash');
-        $exchange = $request->input('exchange');
+        $discount = $request->discount;
+        $cash = $request->input("cash");
+        $exchange = $request->exchange;
         // Pass the sales data to the view
         $data = [
             'sales' => $sales,
@@ -192,6 +195,7 @@ class registerController extends Controller
             'cash' =>  $cash,
             'exchange' =>    $exchange,
         ];
+  
 
         $total = $request->input('total');
         $Customer_Name = $request->input('Customer_Name');
@@ -205,10 +209,32 @@ class registerController extends Controller
                 'Customer_Name' => $Customer_Name
             ]);
 
+        
             $pdf = PDF::loadView('pos_pdf', $data);
             return $pdf->download('invoice.pdf');
         } else {
             return response()->json(['message' => 'OR not found'], 404);
         }
+    }
+
+
+    public function registerUser(Request $request)
+    {
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
+        //     'user_type' => 'required|in:ADMIN,EMPLOYEE',
+        //     'password' => 'required|string|max:255',
+        // ]);
+
+        $user = User::create([
+            'name' => $request->UserName,
+            'email' => $request->Email,
+            'user_type' => $request->user_type,
+            'password' => Hash::make($request->password),
+        ]);
+
+        event(new Registered($user));
+        return back();
     }
 }

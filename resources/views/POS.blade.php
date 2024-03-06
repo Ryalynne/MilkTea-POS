@@ -80,13 +80,14 @@
                         <span>Total:</span>
                         <span id="total">₱{{ number_format($sale->sum('Sub_Total'), 2) }}</span>
                     </div>
+
                     <input type="number" id="discount" name="discount"
                         class="mb-5 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Discount" required>
-                    <input type="number" id="cash"  name="cash"
+                    <input type="number" id="cash" name="cash"
                         class="mb-5 bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Cash" required>
-                    <input type="text" id="exchange"  name="exchange"
+                    <input type="text" id="exchange" name="exchange"
                         class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                         placeholder="Exchange" required disabled>
                 @else
@@ -117,20 +118,29 @@
                     class="inline-flex   mr-2 justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                     onclick="location.reload()">Refresh
                 </button>
-                <button type="button"
-                    class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2">Cancel</button>
                 @if ($sale->isNotEmpty())
+                    <form method="post"
+                        action="{{ route('cancelOrder.order', ['OR' => $sale->first()->OrNumber ?: '']) }}">
+                        @csrf
+                        <button type="submit"
+                            class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2">Cancel</button>
+                    </form>
+
                     <form id="sellForm" method="POST"
                         action="{{ route('register.sell', ['OR' => $sale->first()->OrNumber ?: '']) }}">
                         @csrf
                         <input type="hidden" name="Customer_Name" id="Customer_Name">
                         <input type="hidden" name="total" value="{{ number_format($sale->sum('Sub_Total'), 2) }}">
+
+                        <input type="number" id="discount1" name="discount" placeholder="Discount" hidden>
+                        <input type="number" id="cash1" name="cash" placeholder="Cash" hidden>
+                        <input type="text" id="exchange1" name="exchange" placeholder="Exchange" hidden>
+
                         <button id="sellButton" type="submit"
-                            class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5" disabled>Sell</button>
+                            class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
+                            disabled>Sell</button>
                     </form>
                 @else
-                    <button id="sellButton" type="button"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 "disabled>Sell</button>
                 @endif
             </div>
         </div>
@@ -240,21 +250,28 @@
                 var total = parseFloat(document.getElementById('total').textContent.replace('₱', '')) || 0;
                 var discount = parseFloat(document.getElementById('discount').value) || 0;
                 var cash = parseFloat(document.getElementById('cash').value) || 0;
-                
+
+                var discount1 = document.getElementById('discount1');
+                var cash1 = document.getElementById('cash1');
+                var exchange1 = document.getElementById('exchange1');
+
                 // Compute the exchange
                 var exchange = cash - (total - discount);
                 document.getElementById('exchange').value = '₱' + exchange.toFixed(2);
-                
+
                 // Enable/disable the Sell button based on cash and discount amounts
                 var sellButton = document.getElementById('sellButton');
                 sellButton.disabled = (cash < total) || (discount > cash) || (discount > total);
+                discount1.value = discount;
+                cash1.value = cash;
+                exchange1.value = exchange.toFixed(2);
             }
-        
+
             // Add event listeners to the discount and cash input fields
             document.getElementById('discount').addEventListener('input', computeExchange);
             document.getElementById('cash').addEventListener('input', computeExchange);
         </script>
-        
-        
+
+
 
 </x-app-layout>

@@ -24,13 +24,13 @@
                             </svg>
                         </div>
                         <input type="text" id="table-search-users"
-                            class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                            class="myInput block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Search for users">
                     </div>
                 </div>
                 <!-- Table -->
                 <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <table class="table w-full text-sm text-left rtl:text-right text-gray-500">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
@@ -70,7 +70,7 @@
                         </thead>
                         <tbody>
                             @foreach ($categories as $category)
-                                <tr class="bg-white border-b">
+                                <tr class="bg-white border-b tr">
                                     <th scope="row"
                                         class="border px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
                                         {{ $category->recipe->recipe_name }}

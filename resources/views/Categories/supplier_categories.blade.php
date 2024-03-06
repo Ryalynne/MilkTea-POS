@@ -23,13 +23,13 @@
                             </svg>
                         </div>
                         <input type="text" id="table-search-users"
-                            class="block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                            class="myInput block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Search for users">
                     </div>
                 </div>
 
                 <div class="relative overflow-x-auto">
-                    <table class="w-full text-sm text-left rtl:text-right text-gray-500">
+                    <table class="table w-full text-sm text-left rtl:text-right text-gray-500">
                         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
                             <tr>
                                 <th scope="col" class="px-6 py-3">
@@ -42,12 +42,16 @@
                         </thead>
                         <tbody>
                             @foreach ($supplier as $item)
-                                <tr class="bg-white border-b">
+                                <tr class="bg-white border-b tr">
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
                                         {{ $item->supplier_name }}
                                     </th>
-                                    <td class="px-6 py-4">
-                                        <a href="#" class="font-medium text-blue-600 hover:underline">Edit</a>
+                                    <td class="border px-6 py-4">
+                                        <a href="#"
+                                            class="modalButtonUpdate font-medium text-blue-600 hover:underline edit-link"
+                                            data-id="{{ $item->id }}" data-name="{{ $item->supplier_name }}">
+                                            Edit
+                                        </a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -89,6 +93,43 @@
             </form>
         </div>
     </div>
+    <div id="myModal1" class="hidden fixed inset-0 z-10 bg-gray-500 bg-opacity-75 flex justify-center items-center">
+        <div class="bg-white rounded-lg shadow-lg p-8 max-h-[800px] overflow-y-auto">
+            <!-- Added max-h-[400px] class for maximum height and overflow-y-auto -->
+            <form method="POST" action="{{ route('Update-Categories') }}">
+                @csrf
+                <div class="flex items-center justify-between w-full">
+                    <h3 class="text-lg font-bold leading-6 text-gray-900 mb-2">--------- UPDATE SUPPLIER
+                        ------------</h3>
+                    <button id="closeModal1" type="button"
+                        class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                        <span class="sr-only">Close</span>
+                        <!-- Heroicon name: outline/x -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="mb-6" hidden>
+                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900">SUPPLIER NAME</label>
+                    <input name="id" type="text" id="id"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Name of the Brand" required />
+                </div>
+                <div class="mb-6">
+                    <label for="text" class="block mb-2 text-sm font-medium text-gray-900">SUPPLIER NAME</label>
+                    <input name="name" type="text" id="name"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder="Name of the SUPPLIER" required />
+                </div>
+                <button type="submit" name="supplierBTN"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">UPDATE</button>
+            </form>
+        </div>
     </div>
+    </div>
+    <script src="{{ asset('./javascript/update_categories.js') }}"></script>
     <script src="{{ asset('./javascript/register_java.js') }}"></script>
 </x-app-layout>

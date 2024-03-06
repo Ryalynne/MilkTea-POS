@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('Image')->nullable();
             $table->string('Product_Cetegories');
             $table->string('Selling_Price');
+            $table->string('status')->default(0);
             $table->timestamps();
         });
     }

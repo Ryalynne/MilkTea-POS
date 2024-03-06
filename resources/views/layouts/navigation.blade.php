@@ -12,132 +12,174 @@
                     <h1 class="ml-3">MILKIZE INVENTORY AND POS SYSTEM</h1>
                 </div>
 
-                <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="route('POS')" :active="request()->routeIs('POS')">
-                        {{ __('POS') }}
-                    </x-nav-link>
-                    <div class="hidden sm:flex sm:items-center sm:ms-6">
-                        <x-dropdown align="left" width="48">
-                            <x-slot name="trigger">
-                                <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    <div> {{ __('Inventory') }}</div>
 
-                                    <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
 
-                            <x-slot name="content">
-                                <x-dropdown-link :href="route('Register-Supplier')" :active="request()->routeIs('Register-Supplier')">
-                                    {{ __('Register Supplier') }}
-                                </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('Register-Item')" :active="request()->routeIs('Register-Item')">
-                                    {{ __('Register Items') }}
-                                </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('Ingredients-Volume')" :active="request()->routeIs('Ingredients-Volume')">
-                                    {{ __('Ingredients Volume') }}
-                                </x-dropdown-link>
 
-                                <!-- <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+
+
+
+                @if (Auth::user()->user_type != 'DISABLED')
+                    <!-- Navigation Links -->
+                    <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                            {{ __('Dashboard') }}
+                        </x-nav-link>
+                        <x-nav-link :href="route('POS')" :active="request()->routeIs('POS')">
+                            {{ __('POS') }}
+                        </x-nav-link>
+                        <div class="hidden sm:flex sm:items-center sm:ms-6">
+                            <x-dropdown align="left" width="48">
+                                <x-slot name="trigger">
+                                    <button
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                        <div> {{ __('Inventory') }}</div>
+
+                                        <div class="ms-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </x-slot>
+
+                                <x-slot name="content">
+                                    <x-dropdown-link :href="route('Register-Supplier')" :active="request()->routeIs('Register-Supplier')">
+                                        {{ __('Register Supplier') }}
+                                    </x-dropdown-link>
+
+                                    <x-dropdown-link :href="route('Register-Item')" :active="request()->routeIs('Register-Item')">
+                                        {{ __('Register Items') }}
+                                    </x-dropdown-link>
+
+                                    <x-dropdown-link :href="route('Ingredients-Volume')" :active="request()->routeIs('Ingredients-Volume')">
+                                        {{ __('Ingredients Volume') }}
+                                    </x-dropdown-link>
+
+                                    <!-- <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                     {{ __('Purchase') }}
                                 </x-dropdown-link> -->
 
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
 
-                    <div class="hidden sm:flex sm:items-center sm:ms-6">
-                        <x-dropdown align="left" width="48">
-                            <x-slot name="trigger">
-                                <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    <div> {{ __('Categories') }}</div>
+                        <div class="hidden sm:flex sm:items-center sm:ms-6">
+                            <x-dropdown align="left" width="48">
+                                <x-slot name="trigger">
+                                    <button
+                                        class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                        <div> {{ __('Categories') }}</div>
 
-                                    <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
+                                        <div class="ms-1">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                viewBox="0 0 20 20">
+                                                <path fill-rule="evenodd"
+                                                    d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                    clip-rule="evenodd" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                </x-slot>
 
-                            <x-slot name="content">
-                                <x-dropdown-link :href="route('Ingredient-categories')" :active="request()->routeIs('Ingredient-categories')">
-                                    {{ __('Register Ingredient') }}
-                                </x-dropdown-link>
+                                <x-slot name="content">
+                                    <x-dropdown-link :href="route('Ingredient-categories')" :active="request()->routeIs('Ingredient-categories')">
+                                        {{ __('Register Ingredient') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('supplier-categories')" :active="request()->routeIs('supplier-categories')">
-                                    {{ __('Register Supplier') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link :href="route('supplier-categories')" :active="request()->routeIs('supplier-categories')">
+                                        {{ __('Register Supplier') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('brand-categories')" :active="request()->routeIs('brand-categories')">
-                                    {{ __('Register Brand') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link :href="route('brand-categories')" :active="request()->routeIs('brand-categories')">
+                                        {{ __('Register Brand') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('unit-categories')" :active="request()->routeIs('unit-categories')">
-                                    {{ __('Register Unit') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link :href="route('unit-categories')" :active="request()->routeIs('unit-categories')">
+                                        {{ __('Register Unit') }}
+                                    </x-dropdown-link>
 
-                                <x-dropdown-link :href="route('toppins-add')" :active="request()->routeIs('toppins-add')">
-                                    {{ __('Register Toppings/Add On') }}
-                                </x-dropdown-link>
+                                    <x-dropdown-link :href="route('toppins-add')" :active="request()->routeIs('toppins-add')">
+                                        {{ __('Register Toppings/Add On') }}
+                                    </x-dropdown-link>
 
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
-                    <x-nav-link :href="route('Sales_Report', [
-                        'start_date' => now()->format('Y-m-d'),
-                        'end_date' => now()->format('Y-m-d'),
-                    ])" :active="request()->routeIs('Sales_Report')">
-                        {{ __('Reports') }}
-                    </x-nav-link>
-                    <div class="hidden sm:flex sm:items-center sm:ms-6">
-                        <x-dropdown align="left" width="48">
-                            <x-slot name="trigger">
-                                <button
-                                    class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                    <div> {{ __('Maintenance') }}</div>
+                                </x-slot>
+                            </x-dropdown>
+                        </div>
+                        <x-nav-link :href="route('Sales_Report', [
+                            'start_date' => now()->format('Y-m-d'),
+                            'end_date' => now()->format('Y-m-d'),
+                        ])" :active="request()->routeIs('Sales_Report')">
+                            {{ __('Reports') }}
+                        </x-nav-link>
+                        @if (Auth::user()->user_type === 'ADMIN')
+                            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                                <x-dropdown align="left" width="48">
+                                    <x-slot name="trigger">
+                                        <button
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                            <div> {{ __('Maintenance') }}</div>
 
-                                    <div class="ms-1">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                            viewBox="0 0 20 20">
-                                            <path fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                </button>
-                            </x-slot>
-                            <x-slot name="content">
-                                {{-- <x-dropdown-link :href="route('Register-Item')" :active="request()->routeIs('Register-Item')">
+                                            <div class="ms-1">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        {{-- <x-dropdown-link :href="route('Register-Item')" :active="request()->routeIs('Register-Item')">
                                     {{ __('Sugar Level Settings') }}
                                 </x-dropdown-link> --}}
-                                <x-dropdown-link :href="route('Account')" :active="request()->routeIs('Account')">
-                                    {{ __('Accounts') }}
-                                </x-dropdown-link>
-                            </x-slot>
-                        </x-dropdown>
-                    </div>
-                </div>
-            </div>
+                                        <x-dropdown-link :href="route('Account')" :active="request()->routeIs('Account')">
+                                            {{ __('Accounts') }}
+                                        </x-dropdown-link>
+                                        <x-dropdown-link :href="route('Archived')" :active="request()->routeIs('Archived')">
+                                            {{ __('Archived') }}
+                                        </x-dropdown-link>
+                                    </x-slot>
+                                </x-dropdown>
+                            </div>
+                        @else
+                            <div class="hidden sm:flex sm:items-center sm:ms-6">
+                                <x-dropdown align="left" width="48">
+                                    <x-slot name="trigger">
+                                        <button
+                                            class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                            <div> {{ __('Maintenance') }}</div>
 
+                                            <div class="ms-1">
+                                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                                    viewBox="0 0 20 20">
+                                                    <path fill-rule="evenodd"
+                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                        clip-rule="evenodd" />
+                                                </svg>
+                                            </div>
+                                        </button>
+                                    </x-slot>
+                                    <x-slot name="content">
+                                        {{-- <x-dropdown-link :href="route('Register-Item')" :active="request()->routeIs('Register-Item')">
+                                {{ __('Sugar Level Settings') }}
+                            </x-dropdown-link> --}}
+                                        <x-dropdown-link :href="route('Archived')" :active="request()->routeIs('Archived')">
+                                            {{ __('Archived') }}
+                                        </x-dropdown-link>
+                                    </x-slot>
+                                </x-dropdown>
+                            </div>
+                        @endif
+                    </div>
+            </div>
+            @endif
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
@@ -175,6 +217,11 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+
+
+
+
+
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">

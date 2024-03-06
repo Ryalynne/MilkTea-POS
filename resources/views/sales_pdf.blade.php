@@ -7,7 +7,8 @@
         content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Sales Income</title>
-    <h1>Date Range: {{ $startDate }} - {{ $endDate }}</h1>
+    <h1 class="title">MILKIZE SALES INCOME</h1>
+    <h2>Date Range: {{ $startDate }} - {{ $endDate }}</h2>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -18,30 +19,22 @@
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-
+        .title{
+            text-align: center;
+        }
         th,
         td {
-            border: 1px solid #dddddd;
-            text-align: left;
+            border: 1px solid #ddd;
             padding: 8px;
+            text-align: left;
         }
 
         th {
             background-color: #f2f2f2;
-            color: #333333;
+        }
+
+        .total {
             font-weight: bold;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        .bg-white {
-            background-color: #ffffff;
-        }
-
-        .border-b {
-            border-bottom: 1px solid #dddddd;
         }
     </style>
 </head>
@@ -62,8 +55,12 @@
         @foreach ($sales as $items)
             @php
                 $orderNo = $items->saleproduct->OrNumber;
-                $total = is_numeric(str_replace(',', '', $items->Total)) ? floatval(str_replace(',', '', $items->Total)) : 0;
-                $costPrice = is_numeric(str_replace(',', '', $items->Cost_Price)) ? floatval(str_replace(',', '', $items->Cost_Price)) : 0;
+                $total = is_numeric(str_replace(',', '', $items->Total))
+                    ? floatval(str_replace(',', '', $items->Total))
+                    : 0;
+                $costPrice = is_numeric(str_replace(',', '', $items->Cost_Price))
+                    ? floatval(str_replace(',', '', $items->Cost_Price))
+                    : 0;
                 $profit = $total - $costPrice;
 
                 // Initialize summary for this order number if not exist
@@ -195,7 +192,9 @@
                                 </td>
                                 <td class="border px-6 py-4 text-right">
                                     @php
-                                        $total = is_numeric(str_replace(',', '', $items->Sub_Total)) ? floatval(str_replace(',', '', $items->Sub_Total)) : 0;
+                                        $total = is_numeric(str_replace(',', '', $items->Sub_Total))
+                                            ? floatval(str_replace(',', '', $items->Sub_Total))
+                                            : 0;
                                         $costPrice = is_numeric($items->Cost_Price) ? floatval($items->Cost_Price) : 0;
                                         $unit = is_numeric($items->Unit_Price) ? floatval($items->Unit_Price) : 0;
                                         $profit = $total - $costPrice;

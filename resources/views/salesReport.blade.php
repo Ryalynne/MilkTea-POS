@@ -11,20 +11,26 @@
 
                 <div class="flex mt-3 mb-5">
                 </div>
-                <form action="/Sales_Report" method="get">
-                    <div class="date-picker flex gap-4 mt-4">
+                <form action="/Sales_Report" method="get" class="mb-4">
+                    <div class="date-picker flex items-center gap-4">
+                        <label for="start-date" class="text-gray-700">START DATE:</label>
                         <input type="date" id="start-date" name="start_date"
                             value="{{ request()->input('start_date') }}"
                             class="border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg p-2">
+
+                        <label for="end-date" class="text-gray-700">END DATE:</label>
                         <input type="date" id="end-date" name="end_date" value="{{ request()->input('end_date') }}"
                             class="border-gray-300 focus:border-blue-500 focus:ring-blue-500 rounded-lg p-2">
+
                         <button type="submit"
-                            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Generate
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Generate
                             Report</button>
+
                         <button type="button" id="print-pdf"
-                            class="inline-flex justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">PRINT</button>
+                            class="inline-flex items-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">PRINT</button>
                     </div>
                 </form>
+
 
 
 
@@ -46,8 +52,12 @@
                     @foreach ($sales as $items)
                         @php
                             $orderNo = $items->saleproduct->OrNumber;
-                            $total = is_numeric(str_replace(',', '', $items->Total)) ? floatval(str_replace(',', '', $items->Total)) : 0;
-                            $costPrice = is_numeric(str_replace(',', '', $items->Cost_Price)) ? floatval(str_replace(',', '', $items->Cost_Price)) : 0;
+                            $total = is_numeric(str_replace(',', '', $items->Total))
+                                ? floatval(str_replace(',', '', $items->Total))
+                                : 0;
+                            $costPrice = is_numeric(str_replace(',', '', $items->Cost_Price))
+                                ? floatval(str_replace(',', '', $items->Cost_Price))
+                                : 0;
                             $profit = $total - $costPrice;
 
                             // Initialize summary for this order number if not exist
@@ -158,8 +168,12 @@
                                         </td>
                                         <td class="border px-6 py-4 text-right">
                                             @php
-                                                $total = is_numeric(str_replace(',', '', $items->Sub_Total)) ? floatval(str_replace(',', '', $items->Sub_Total)) : 0;
-                                                $costPrice = is_numeric($items->Cost_Price) ? floatval($items->Cost_Price) : 0;
+                                                $total = is_numeric(str_replace(',', '', $items->Sub_Total))
+                                                    ? floatval(str_replace(',', '', $items->Sub_Total))
+                                                    : 0;
+                                                $costPrice = is_numeric($items->Cost_Price)
+                                                    ? floatval($items->Cost_Price)
+                                                    : 0;
                                                 $profit = $total - $costPrice;
                                                 echo number_format(abs($profit), 2); // Using abs() to ensure positive value
                                             @endphp
