@@ -52,4 +52,5 @@
     @else
         <h1 class="text-red-500 text-5xl font-bold">YOUR ACCOUNT IS DISABLED PLEASE CONTACT YOUR ADMIN</h1>
     @endif
+
 </x-app-layout>

@@ -3,7 +3,6 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Register Item') }}
         </h2>
-        @vite('resources/css/app.css')
     </x-slot>
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -80,17 +79,19 @@
                                     <td class="border px-6 py-4">
                                         @if (!empty($product->Image))
                                             <img src="{{ asset($product->Image) }}" alt="Product Image"
-                                                style="max-width: 100px; max-height: 100px">
+                                                 style="height: 200px; width: 250px;">
                                         @else
                                             <img src="{{ asset('uploads/category/1708225090.jpg') }}" alt="No Image"
-                                                style="max-width: 100px; max-height: 100px">
+                                                 style="height: 200px; width: 250px;">
                                         @endif
                                     </td>
                                     <td class="border px-6 py-4">{{ $product->Product_Cetegories }}</td>
                                     <td class="border px-6 py-4">{{ implode(',', array_unique($recipeNames)) }}</td>
                                     {{-- <td class="border px-6 py-4">{{ implode(',', array_unique($recipeNames)) }} unit: {{ implode(',', array_unique($recipeNames1)) }} volume: {{ implode(',', array_unique($recipeNames2  )) }}</td> --}}
-                                    <td class="border px-6 py-4 text-right">{{ $product->ingredients->first()->Cost }}
+                                    <td class="border px-6 py-4 text-right">
+                                        {{ $product->ingredients->first()->Cost !== null ? $product->ingredients->first()->Cost : '0.00' }}
                                     </td>
+
                                     <td class="border px-6 py-4 text-right">{{ $product->Selling_Price }}</td>
                                     <td class="border px-6 py-4 text-right">
                                         {{ $product->Selling_Price - $product->ingredients->first()->Cost }}</td>
@@ -98,7 +99,8 @@
                                         <a href="#"
                                             class="modalButtonUpdate font-medium text-blue-600 hover:underline edit-link"
                                             data-id="{{ $product->id }}" data-product="{{ $product->Product_Name }}"
-                                            data-images="{{ $product->Image }}" data-categories="{{ $product->Product_Cetegories }}"
+                                            data-images="{{ $product->Image }}"
+                                            data-categories="{{ $product->Product_Cetegories }}"
                                             data-cost="  {{ $product->ingredients->first()->Cost }}"
                                             data-price="  {{ $product->Selling_Price }}">
                                             Edit
@@ -228,7 +230,7 @@
             class="hidden fixed inset-0 z-10 bg-gray-500 bg-opacity-75 flex justify-center items-center">
             <div class="bg-white rounded-lg shadow-lg p-8 max-h-[800px] overflow-y-auto">
                 <!-- Added max-h-[400px] class for maximum height and overflow-y-auto -->
-                <form method="POST" action="{{ route('updateItem') }}">
+                <form method="POST" action="{{ route('updateItem') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="flex items-center justify-between w-full">
                         <h3 class="text-lg font-bold leading-6 text-gray-900 mb-2">--------- UPDATE ACCOUNT

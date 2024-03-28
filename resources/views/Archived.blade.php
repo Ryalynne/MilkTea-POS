@@ -77,10 +77,10 @@
                                     <td class="border px-6 py-4">
                                         @if (!empty($product->Image))
                                             <img src="{{ asset($product->Image) }}" alt="Product Image"
-                                                style="max-width: 100px; max-height: 100px">
+                                                style="height: 200px; width: 200px;">
                                         @else
                                             <img src="{{ asset('uploads/category/1708225090.jpg') }}" alt="No Image"
-                                                style="max-width: 100px; max-height: 100px">
+                                                style="height: 200px; width: 200px;">
                                         @endif
                                     </td>
                                     <td class="border px-6 py-4">{{ $product->Product_Cetegories }}</td>

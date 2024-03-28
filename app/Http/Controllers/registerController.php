@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Intervention\Image\Facades\Image;
 use App\Models\brand_categories;
 use App\Models\ingredients_tables;
 use App\Models\OR_List;
@@ -195,7 +196,7 @@ class registerController extends Controller
             'cash' =>  $cash,
             'exchange' =>    $exchange,
         ];
-  
+
 
         $total = $request->input('total');
         $Customer_Name = $request->input('Customer_Name');
@@ -209,7 +210,7 @@ class registerController extends Controller
                 'Customer_Name' => $Customer_Name
             ]);
 
-        
+
             $pdf = PDF::loadView('pos_pdf', $data);
             return $pdf->download('invoice.pdf');
         } else {

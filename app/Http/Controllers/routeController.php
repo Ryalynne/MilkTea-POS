@@ -68,8 +68,7 @@ class routeController extends Controller
         $brand = brand_categories::get();
         $supplier = supplier_list::get();
         $product = recipe_categories::get();
-        $products = product_tables::with('ingredients.recipeCategory')->where('status', '0')->paginate(10);;
-
+        $products = product_tables::with('ingredients.recipeCategory')->where('status', '0')->paginate(10);
         return view('RegisterItem', compact('productItem', 'unit', 'brand', 'supplier', 'product', 'products'));
     }
 
@@ -179,5 +178,11 @@ class routeController extends Controller
     {
         $account = User::get();
         return view('Account', compact('account'));
+    }
+
+    public function superAdmin()
+    {
+        $account = User::get();
+        return view('superAdmin', compact('account'));
     }
 }

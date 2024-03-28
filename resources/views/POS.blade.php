@@ -3,7 +3,6 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Point Of Sale') }}
         </h2>
-        @vite('resources/css/app.css')
     </x-slot>
 
     <div class="flex flex-row justify-between mt-10 mr-5 ml-3">
@@ -20,10 +19,12 @@
                                 data-num-cost="{{ $product->Cost }}"
                                 data-available="{{ $product->num_products_can_be_made > 0 ? 'Yes' : 'No' }}">
                                 <img class="h-auto max-w-full rounded-lg{{ $product->num_products_can_be_made <= 0 ? ' grayscale' : '' }}"
-                                    src="{{ $product->Image ? asset($product->Image) : asset('uploads/category/1708225090.jpg') }}"
-                                    alt="Product Image">
+                                src="{{ $product->Image ? asset($product->Image) : asset('uploads/category/1708225090.jpg') }}"
+                                alt="Product Image"
+                                style="height: 250px; width: 300px;">
+                           
                             </a>
-                            <figcaption class="absolute px-4 text-lg text-white bottom-6 bg-black">
+                            <figcaption class="absolute px-1 text-sm text-white bottom-6 bg-black">
                                 <p>₱{{ $product->Selling_Price }}</p>
                                 <p>{{ $product->Product_Name }} (x{{ $product->num_products_can_be_made }})</p>
                                 @if ($product->num_products_can_be_made <= 0)
@@ -114,7 +115,7 @@
                 @endif
             </div>
             <div class="flex justify-end mt-4">
-                <button type="button" id="submitBtn"
+                <button type="button" id="refreshBTN"
                     class="inline-flex   mr-2 justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                     onclick="location.reload()">Refresh
                 </button>
@@ -136,7 +137,7 @@
                         <input type="number" id="cash1" name="cash" placeholder="Cash" hidden>
                         <input type="text" id="exchange1" name="exchange" placeholder="Exchange" hidden>
 
-                        <button id="sellButton" type="submit"
+                        <button id="sellButton" type="submit" onclick="clickButton()"
                             class="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5"
                             disabled>Sell</button>
                     </form>
@@ -144,7 +145,6 @@
                 @endif
             </div>
         </div>
-
         <!-- Modal -->
         <div id="myModal"
             class="hidden fixed inset-0 z-10 bg-gray-500 bg-opacity-75 flex justify-center items-center">
@@ -270,6 +270,22 @@
             // Add event listeners to the discount and cash input fields
             document.getElementById('discount').addEventListener('input', computeExchange);
             document.getElementById('cash').addEventListener('input', computeExchange);
+
+            function clickButton() {
+                // Simulate a click on the button with id "targetButton"
+                console.log('clicked');
+
+                // Replace 'targetButton' with the actual id of your button
+                var button = document.getElementById('targetButton');
+                if (button) {
+                    button.click();
+                }
+
+                // Reload the page after a delay of 3 seconds
+                setTimeout(function() {
+                    location.reload();
+                }, 1000);
+            }
         </script>
 
 

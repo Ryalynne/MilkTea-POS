@@ -30,6 +30,9 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/Archived', [routeController::class, 'Register_Archived_route'])->name('Archived');
     Route::get('/Ingredients-Volume', [routeController::class, 'Ingredients_Volume_route'])->name('Ingredients-Volume');
     Route::get('/POS', [routeController::class, 'POS_route'])->name('POS');
+    Route::get('/superAdmin', [routeController::class, 'superAdmin'])->name('superAdmin');
+
+
     Route::get('/brand-categories', [routeController::class, 'brand_categories'])->name('brand-categories');
     Route::get('/unit-categories', [routeController::class, 'unit_categories'])->name('unit-categories');
     Route::get('/supplier-categories', [routeController::class, 'supplier_categories'])->name('supplier-categories');
@@ -38,6 +41,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/Sales_Report', [routeController::class, 'Sales_Report'])->name('Sales_Report');
     Route::get('/Account', [routeController::class, 'Account'])->name('Account');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+
+
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //print
