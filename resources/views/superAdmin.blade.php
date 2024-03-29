@@ -136,7 +136,7 @@
             class="hidden fixed inset-0 z-10 bg-gray-500 bg-opacity-75 flex justify-center items-center">
             <div class="bg-white rounded-lg shadow-lg p-8 max-h-[800px] overflow-y-auto">
                 <!-- Added max-h-[400px] class for maximum height and overflow-y-auto -->
-                <form method="POST" action="{{ route('updateUserType') }}">
+                <form method="POST" action="{{ route('updateUserTypeSuper') }}">
                     @csrf
                     <div class="flex items-center justify-between w-full">
                         <h3 class="text-lg font-bold leading-6 text-gray-900 mb-2">--------- UPDATE ACCOUNT
@@ -184,10 +184,10 @@
                             <option value="DISABLED">DISABLED</option>
                         </select>
                     </div>
-                    <button type="submit"
+                    <button type="submit" name="removed"
                     class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">DELETE</button>
-          
-                    <button type="submit"
+
+                    <button type="submit" name="update"
                         class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">UPDATE</button>
                 </form>
             </div>

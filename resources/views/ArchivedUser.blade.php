@@ -7,7 +7,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex mt-3">
+                <div class="flex mt-3 mb-2">
                     <label for="table-search" class="sr-only">Search</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 rtl:inset-r-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -33,9 +33,9 @@
                                 <th scope="col" class="px-6 py-3">
                                     Email
                                 </th>
-                                <th scope="col" class="px-6 py-3">
+                                {{-- <th scope="col" class="px-6 py-3">
                                     Type
-                                </th>
+                                </th> --}}
                                 <th scope="col" class="px-6 py-3">
                                     Action
                                 </th>
@@ -50,9 +50,9 @@
                                     <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
                                         {{ $item->email }}
                                     </th>
-                                    <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+                                    {{-- <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
                                         {{ $item->user_type }}
-                                    </th>
+                                    </th> --}}
                                     <td class="border px-6 py-4">
                                         <a href="#"
                                             class="modalButtonUpdate font-medium text-blue-600 hover:underline edit-link"
@@ -69,12 +69,11 @@
             </div>
         </div>
 
-
         <div id="myModal1"
             class="hidden fixed inset-0 z-10 bg-gray-500 bg-opacity-75 flex justify-center items-center">
             <div class="bg-white rounded-lg shadow-lg p-8 max-h-[800px] overflow-y-auto">
                 <!-- Added max-h-[400px] class for maximum height and overflow-y-auto -->
-                <form method="POST" action="{{ route('updateUserType') }}">
+                <form method="POST" action="{{ route('updateUserTypeSuper') }}">
                     @csrf
                     <div class="flex items-center justify-between w-full">
                         <h3 class="text-lg font-bold leading-6 text-gray-900 mb-2">--------- UPDATE ACCOUNT
@@ -122,11 +121,8 @@
                             <option value="DISABLED">DISABLED</option>
                         </select>
                     </div>
-                    <button type="submit"
-                        class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">DELETE</button>
-
-                    <button type="submit"
-                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">UPDATE</button>
+                    <button type="submit" name="restore"
+                        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">RESTORE</button>
                 </form>
             </div>
         </div>

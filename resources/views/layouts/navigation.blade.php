@@ -13,13 +13,14 @@
                 </div>
 
                 @if (Auth::user()->user_type != 'DISABLED')
+                @if (Auth::user()->user_type != 'REMOVED')
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
                         @if (Auth::user()->user_type == 'SUPER ADMIN')
                             <x-nav-link :href="route('superAdmin')" :active="request()->routeIs('superAdmin')">
                                 {{ __('Account') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('superAdmin')" :active="request()->routeIs('superAdmin')">
+                            <x-nav-link :href="route('superAdminArchived')" :active="request()->routeIs('superAdminArchived')">
                                 {{ __('Archived Account') }}
                             </x-nav-link>
                         @else
@@ -179,9 +180,10 @@
                             @endif
                         @endif
                     </div>
+                    @endif
+                    @endif
             </div>
-
-            @endif
+           
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">

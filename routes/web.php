@@ -31,7 +31,7 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/Ingredients-Volume', [routeController::class, 'Ingredients_Volume_route'])->name('Ingredients-Volume');
     Route::get('/POS', [routeController::class, 'POS_route'])->name('POS');
     Route::get('/superAdmin', [routeController::class, 'superAdmin'])->name('superAdmin');
-
+    Route::get('/superAdminArchived', [routeController::class, 'superAdminArchived'])->name('superAdminArchived');
 
     Route::get('/brand-categories', [routeController::class, 'brand_categories'])->name('brand-categories');
     Route::get('/unit-categories', [routeController::class, 'unit_categories'])->name('unit-categories');
@@ -66,6 +66,8 @@ Route::middleware('auth', 'verified')->group(function () {
     Route::get('/find-recipe/{category}', [AjaxController::class,  'findRecipe'])->name('find-recipe');
     //uddate
     Route::post('/updateUserType', [updateController::class, 'updateUserType'])->name('updateUserType');
+    Route::post('/updateUserTypeSuper', [updateController::class, 'updateUserTypeSuper'])->name('updateUserTypeSuper');
+
     Route::post('/updateItem', [updateController::class, 'updateItem'])->name('updateItem');
 
     Route::post('/Update-Supply', [updateController::class, 'updateSupplier'])->name('Update-Supply');

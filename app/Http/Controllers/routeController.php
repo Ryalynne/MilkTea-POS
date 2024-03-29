@@ -176,13 +176,19 @@ class routeController extends Controller
 
     public function Account()
     {
-        $account = User::get();
+        $account = User::whereNot('user_type', 'REMOVED')->whereNot('user_type', 'SUPER ADMIN')->get();
         return view('Account', compact('account'));
     }
 
     public function superAdmin()
     {
-        $account = User::get();
+        $account = User::whereNot('user_type', 'REMOVED')->get();
         return view('superAdmin', compact('account'));
+    }
+
+    public function superAdminArchived()
+    {
+        $account = User::where('user_type', 'REMOVED')->get();
+        return view('ArchivedUser', compact('account'));
     }
 }

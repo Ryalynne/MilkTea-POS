@@ -70,6 +70,31 @@ class updateController extends Controller
         return redirect()->back()->with('success', 'Supplier information updated successfully');
     }
 
+    public function updateUserTypeSuper(Request $request)
+    {
+        if ($request->has('removed')) {
+            $userID = $request->input('userID');
+            $user = User::findOrFail($userID);
+            $user->user_type = 'REMOVED';
+            $user->save();
+            return back();
+        } else if ($request->has('update')) {
+            $userType = $request->input('user_type1');
+            $userID = $request->input('userID');
+            $user = User::findOrFail($userID);
+            $user->user_type = $userType;
+            $user->save();
+            return back();
+        }
+        else if ($request->has('restore')) {
+            $userType = $request->input('user_type1');
+            $userID = $request->input('userID');
+            $user = User::findOrFail($userID);
+            $user->user_type = $userType;
+            $user->save();
+            return back();
+        }
+    }
 
     public function updateItem(Request $request)
     {
