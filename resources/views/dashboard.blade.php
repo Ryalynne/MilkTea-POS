@@ -6,8 +6,22 @@
     </x-slot>
     @if (Auth::user()->user_type != 'DISABLED')
         @if (Auth::user()->user_type != 'REMOVED')
-            @if (Auth::user()->user_type == 'SUPER ADMIN')
-            <h1 class="text-red-500 text-5xl font-bold">Hello Super Admin {{Auth::user()->name}}</h1>
+            @if (Auth::user()->user_type == 'SUPER_ADMIN')
+                <div class="py-12">
+                    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+                            <div class="p-6">
+                                <div class="bg-blue-300 overflow-hidden shadow-sm sm:rounded-lg">
+                                    <div class="p-6">
+                                        <h3 class="text-lg font-semibold text-white">Users</h3>
+                                        <p class="text-3xl font-bold text-white">{{ number_format($totalUsers) }}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             @else
                 <div class="py-12">
                     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -20,7 +34,8 @@
                                     ]) }}">
                                     <div class="p-6">
                                         <h3 class="text-lg font-semibold text-white">Total Sales</h3>
-                                        <p class="text-3xl font-bold text-white">₱{{ number_format($totalSales, 2) }}</p>
+                                        <p class="text-3xl font-bold text-white">
+                                            ₱{{ number_format($totalSales, 2) }}</p>
                                     </div>
                                 </a>
                             </div>
@@ -32,7 +47,8 @@
                                     ]) }}">
                                     <div class="p-6">
                                         <h3 class="text-lg font-semibold text-white">Total Profit</h3>
-                                        <p class="text-3xl font-bold text-white">₱{{ number_format($totalIncome, 2) }}
+                                        <p class="text-3xl font-bold text-white">
+                                            ₱{{ number_format($totalIncome, 2) }}
                                         </p>
                                     </div>
                                 </a>
@@ -41,7 +57,8 @@
                                 <a href="/Ingredients-Volume">
                                     <div class="p-6">
                                         <h3 class="text-lg font-semibold text-white">Item need to Reorder</h3>
-                                        <p class="text-3xl font-bold text-white">{{ number_format($itemsToReorder) }}
+                                        <p class="text-3xl font-bold text-white">
+                                            {{ number_format($itemsToReorder) }}
                                         </p>
                                     </div>
                                 </a>

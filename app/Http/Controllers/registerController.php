@@ -94,7 +94,8 @@ class registerController extends Controller
         }
         $product = product_tables::create([
             'Product_Name' => $request->Product_Name,
-            'Image' => $path . $filename, // Gamitin ang $path dito para sa path ng larawan
+            'Image' => $path . $filename, 
+            'Size' => $request->Size,// Gamitin ang $path dito para sa path ng larawan
             'Product_Cetegories' => $request->Product_Cetegories,
             'Selling_Price' => $request->Selling_Price
         ]);

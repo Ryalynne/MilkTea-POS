@@ -32,9 +32,9 @@ class routeController extends Controller
 
         // Summing up the values after removing commas
         foreach ($salesRecords as $record) {
-            $totalSales += (int) str_replace(',', '', $record->Total);
+            $totalSales += (float) str_replace(',', '', $record->Unit_Price);
             $totalCostPrice += (float) str_replace(',', '', $record->Cost_Price);
-            $totalIncome += (int) str_replace(',', '', $record->TotalIncome);
+            $totalIncome += (float) str_replace(',', '', $record->TotalIncome);
         }
 
         // Calculating total profit
@@ -101,13 +101,14 @@ class routeController extends Controller
         $products = DB::table('supplier_lists as sl')
             ->join('ingredients_tables as ing', 'sl.recipe_id', '=', 'ing.ingredient_id')
             ->join('product_tables as pt', 'ing.product_id', '=', 'pt.id')
-            ->groupBy('pt.Product_Name', 'pt.Image',  'pt.Selling_Price', 'ing.Cost', 'pt.id')
+            ->groupBy('pt.Product_Name', 'pt.Image',  'pt.Selling_Price', 'ing.Cost', 'pt.id', 'pt.Size')
             ->select(
                 'pt.Product_Name',
                 'pt.Image',
                 'pt.Selling_Price',
                 'ing.Cost',
                 'pt.id',
+                'pt.Size',
                 DB::raw('MIN(FLOOR(sl.remaining / ing.Volume)) AS num_products_can_be_made')
             )->where('pt.status', '0')
             ->get();

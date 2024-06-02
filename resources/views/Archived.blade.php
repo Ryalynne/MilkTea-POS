@@ -35,6 +35,9 @@
                                     Product Name
                                 </th>
                                 <th scope="col" class="px-6 py-3">
+                                    Size
+                                </th>
+                                <th scope="col" class="px-6 py-3">
                                     Image
                                 </th>
                                 <th scope="col" class="px-6 py-3">
@@ -74,13 +77,14 @@
                                 @endforeach
                                 <tr class="border border-gray tr">
                                     <th class="border px-6 py-4">{{ $product->Product_Name }}</th>
+                                    <th class="border px-6 py-4">{{ $product->Size }}</th>
                                     <td class="border px-6 py-4">
                                         @if (!empty($product->Image))
                                             <img src="{{ asset($product->Image) }}" alt="Product Image"
-                                                style="height: 200px; width: 200px;">
+                                                style="height: 200px; width: 150px;">
                                         @else
                                             <img src="{{ asset('uploads/category/1708225090.jpg') }}" alt="No Image"
-                                                style="height: 200px; width: 200px;">
+                                                style="height: 200px; width: 150px;">
                                         @endif
                                     </td>
                                     <td class="border px-6 py-4">{{ $product->Product_Cetegories }}</td>
@@ -98,7 +102,8 @@
                                             data-images="{{ $product->Image }}"
                                             data-categories="{{ $product->Product_Cetegories }}"
                                             data-cost="  {{ $product->ingredients->first()->Cost }}"
-                                            data-price="  {{ $product->Selling_Price }}">
+                                            data-price="  {{ $product->Selling_Price }}"
+                                            data-size="  {{ $product->Size }}">
                                             Edit
                                         </a>
                                     </td>
@@ -139,13 +144,24 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             placeholder="Enter User Name">
                     </div>
-
                     <div class="mb-6">
                         <label for="name" class="block mb-2 text-sm font-medium text-gray-900">PRODUCT
                             NAME</label>
                         <input name="productName" type="text" id="productName" disabled
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             placeholder="Enter User Name">
+                    </div>
+                    <div class="mb-6">
+                        <label for="Size"
+                            class="block mb-2 text-sm font-medium text-gray-900">SIZE</label>
+                        <select name="Size" id="SizeName"
+                            class="border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 bg-white">
+                            <option value="" selected>-- Choose a Size --</option>
+                            <option value="Extra Large">Extra Large</option>
+                            <option value="Large">Large</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Small">Small</option>
+                        </select>
                     </div>
                     <div class="mb-6" hidden>
                         <label for="text" class="block mb-2 text-sm font-medium text-gray-900">UPLOAD NEW IMAGE

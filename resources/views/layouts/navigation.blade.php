@@ -16,7 +16,7 @@
                 @if (Auth::user()->user_type != 'REMOVED')
                     <!-- Navigation Links -->
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex ">
-                        @if (Auth::user()->user_type == 'SUPER ADMIN')
+                        @if (Auth::user()->user_type == 'SUPER_ADMIN')
                             <x-nav-link :href="route('superAdmin')" :active="request()->routeIs('superAdmin')">
                                 {{ __('Account') }}
                             </x-nav-link>

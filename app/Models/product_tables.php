@@ -12,6 +12,7 @@ class product_tables extends Model
     protected $fillable = [
         'Product_Name',
         'Image',
+        'Size',
         'Product_Cetegories',
         'Selling_Price',
         'status',

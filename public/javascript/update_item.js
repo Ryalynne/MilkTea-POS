@@ -9,7 +9,8 @@ const Images = document.getElementById('Image');
 const Categories = document.getElementById('Categories');
 const CostPrice = document.getElementById('CostPrice');
 const SellingPrice = document.getElementById('SellingPrice');
-
+const Size = document.getElementById('SizeName');
+console.log(Size);
 // Loop through modalButtons and attach event listener to each
 for (let i = 0; i < modalButtons.length; i++) {
     modalButtons[i].addEventListener('click', (event) => {
@@ -20,14 +21,17 @@ for (let i = 0; i < modalButtons.length; i++) {
         const categories = event.target.getAttribute('data-categories');
         const cost = event.target.getAttribute('data-cost');
         const price = event.target.getAttribute('data-price');
+        const size = event.target.getAttribute('data-size');
 
         ItemID.value = id || '';
         productName.value = product || '';
-        Images.value = images || '';
+        // Images.value = images || '';
         Categories.value = categories || '';
         CostPrice.value = cost || '';
         SellingPrice.value = price || '';
+        Size.value = size || "";
 
+      
         modal.classList.remove('hidden');
     });
 }

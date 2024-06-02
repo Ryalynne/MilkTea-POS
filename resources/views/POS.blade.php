@@ -26,7 +26,7 @@
                             </a>
                             <figcaption class="absolute px-1 text-sm text-white bottom-6 bg-black">
                                 <p>₱{{ $product->Selling_Price }}</p>
-                                <p>{{ $product->Product_Name }} (x{{ $product->num_products_can_be_made }})</p>
+                                <p>{{ $product->Product_Name }} {{$product->Size}}(x{{ $product->num_products_can_be_made }})</p>
                                 @if ($product->num_products_can_be_made <= 0)
                                     <p>NOT AVAILABLE</p>
                                 @endif
@@ -261,7 +261,7 @@
 
                 // Enable/disable the Sell button based on cash and discount amounts
                 var sellButton = document.getElementById('sellButton');
-                sellButton.disabled = (cash < total) || (discount > cash) || (discount > total);
+                sellButton.disabled = (cash < total) || (discount > total);
                 discount1.value = discount;
                 cash1.value = cash;
                 exchange1.value = exchange.toFixed(2);

@@ -19,9 +19,11 @@
             border-collapse: collapse;
             margin-bottom: 20px;
         }
-        .title{
+
+        .title {
             text-align: center;
         }
+
         th,
         td {
             border: 1px solid #ddd;
@@ -45,8 +47,9 @@
 
     <div class="relative overflow-x-auto">
         @php
+            // Initialize summary array and overall totals
             $summary = [];
-            $totalQuantity = 0;
+            $totalQuantity = 0; // Initialize total quantity
             $totalSales = 0;
             $totalCost = 0;
             $totalProfit = 0;
@@ -54,9 +57,10 @@
 
         @foreach ($sales as $items)
             @php
+                // Extract necessary data from $items
                 $orderNo = $items->saleproduct->OrNumber;
-                $total = is_numeric(str_replace(',', '', $items->Total))
-                    ? floatval(str_replace(',', '', $items->Total))
+                $total = is_numeric(str_replace(',', '', $items->Unit_Price))
+                    ? floatval(str_replace(',', '', $items->Unit_Price))
                     : 0;
                 $costPrice = is_numeric(str_replace(',', '', $items->Cost_Price))
                     ? floatval(str_replace(',', '', $items->Cost_Price))
@@ -75,15 +79,16 @@
 
                 // Update summary values
                 $summary[$orderNo]['total_qty'] += $items->Qty;
-                $summary[$orderNo]['total_sales'] = $total;
-                $summary[$orderNo]['total_cost'] += $costPrice;
-                $summary[$orderNo]['total_profit'] = $total - $costPrice;
+                $summary[$orderNo]['total_sales'] += $total * $items->Qty; // Multiply total by quantity
+                $summary[$orderNo]['total_cost'] += $costPrice * $items->Qty; // Multiply cost by quantity
+                $summary[$orderNo]['total_profit'] += $profit * $items->Qty; // Multiply profit by quantity
 
-                // Update totals
+                // Update overall totals
                 $totalQuantity += $items->Qty;
-                $totalSales += $total;
-                $totalCost += $costPrice;
-                $totalProfit += $profit;
+                $totalSales += $total * $items->Qty; // Multiply total by quantity
+                $totalCost += $costPrice * $items->Qty; // Multiply cost by quantity
+                $totalProfit += $profit * $items->Qty; // Multiply profit by quantity
+
             @endphp
         @endforeach
 
@@ -103,12 +108,9 @@
                     <tr class="bg-white border-b">
                         <td>{{ $orderNo }}</td>
                         <td>{{ $data['total_qty'] }}</td>
-                        <td class="text-right">
-                            {{ number_format($data['total_sales'], 2) }}</td>
-                        <td class="text-right">
-                            {{ number_format($data['total_cost'], 2) }}</td>
-                        <td class="text-right">
-                            {{ number_format($data['total_profit'], 2) }}</td>
+                        <td class="text-right">{{ number_format($data['total_sales'], 2) }}</td>
+                        <td class="text-right">{{ number_format($data['total_cost'], 2) }}</td>
+                        <td class="text-right">{{ number_format($data['total_profit'], 2) }}</td>
                     </tr>
                 @endforeach
             </tbody>
@@ -122,6 +124,10 @@
                 </tr>
             </tfoot>
         </table>
+
+
+
+
 
 
         <div class="relative overflow-x-auto">
@@ -223,7 +229,6 @@
                         </tr>
                     </tfoot>
                 </table>
-
             </div>
         </div>
     </div>

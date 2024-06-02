@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('Product_Name');
             $table->string('Image')->nullable();
+            $table->string('Size');
             $table->string('Product_Cetegories');
             $table->string('Selling_Price');
             $table->string('status')->default(0);

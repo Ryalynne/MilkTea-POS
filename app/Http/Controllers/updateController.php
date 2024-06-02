@@ -85,8 +85,14 @@ class updateController extends Controller
             $user->user_type = $userType;
             $user->save();
             return back();
-        }
-        else if ($request->has('restore')) {
+        } else if ($request->has('reset')) {
+            $userType = $request->input('user_type1');
+            $userID = $request->input('userID');
+            $user = User::findOrFail($userID);
+            $user->password = 'milkize2024';
+            $user->save();
+            return back();
+        } else if ($request->has('restore')) {
             $userType = $request->input('user_type1');
             $userID = $request->input('userID');
             $user = User::findOrFail($userID);
@@ -113,12 +119,21 @@ class updateController extends Controller
             $itemID = $request->input('ItemID');
             $item = product_tables::findOrFail($itemID);
             $item->Product_Name = $request->input('productName');
-            // $item->Image = $request->input('Image');
-            $item->Image = $path . $filename;
-            $item->Product_Cetegories = $request->input('Categories');
-            // $item->cost_price = $request->input('CostPrice');
-            $item->Selling_Price = $request->input('SellingPrice');
-            $item->save();
+            if ($filename == "") {
+                $item->Product_Cetegories = $request->input('Categories');
+                // $item->cost_price = $request->input('CostPrice');
+                $item->Selling_Price = $request->input('SellingPrice');
+                $item->save();
+            } else {
+
+                // $item->Image = $request->input('Image');
+                $item->Image = $path . $filename;
+                $item->Product_Cetegories = $request->input('Categories');
+                // $item->cost_price = $request->input('CostPrice');
+                $item->Selling_Price = $request->input('SellingPrice');
+                $item->save();
+            }
+
 
             return redirect()->back()->with('success', 'User type updated successfully.');
         } elseif ($request->has('removeButton')) {
@@ -142,42 +157,38 @@ class updateController extends Controller
         $ORArray = is_array($OR) ? $OR : [$OR];
         $ORR = OR_List::whereIn('OrNumber', $ORArray)->pluck('id')->toArray();
 
-        // Step 2: Get Product Names based on OR IDs
-        $sales = sales_records::whereIn('Or_id', $ORR)->pluck('Product_Name')->toArray();
-        $salesQty = sales_records::whereIn('Product_Name', $sales)->whereIn('Or_id', $ORR)->pluck('Qty')->toArray();
+        // Step 2: Get Product Names and Quantities based on OR IDs
+        $sales = sales_records::whereIn('Or_id', $ORR)->get(['Product_Name', 'Qty']);
 
-        // Step 3: Get Product IDs based on Product Names
-        $productIDs = product_tables::whereIn('Product_Name', $sales)->pluck('id')->toArray();
+        // Step 3: Update remaining quantities
+        foreach ($sales as $sale) {
+            $productName = $sale->Product_Name;
+            $qty = $sale->Qty;
 
-        // Step 4: Get Ingredient IDs based on Product IDs
-        $ingredientIDs = ingredients_tables::whereIn('product_id', $productIDs)->pluck('id')->toArray();
+            // Get product ID based on product name
+            $productId = product_tables::where('Product_Name', $productName)->value('id');
+            if ($productId) {
+                $ingredientIDs = ingredients_tables::where('product_id', $productId)->pluck('id')->toArray();
 
-        // Step 5: Retrieve Products based on Ingredient IDs
-        $products = product_tables::whereHas('ingredients', function ($query) use ($ingredientIDs) {
-            $query->whereIn('id', $ingredientIDs);
-        })->get();
-
-        // return $productIDs;
-        // Step 6: Update remaining quantities
-        foreach ($salesQty as $key => $qty) {
-            $productId = $productIDs; // Assuming $productIDs and $salesQty are aligned by index
-            $ingredientIDs = ingredients_tables::where('product_id', $productId)->pluck('id')->toArray();
-
-            DB::table('product_tables as pt')
-                ->join('ingredients_tables as ing', 'pt.id', '=', 'ing.product_id')
-                ->join('supplier_lists as sl', 'sl.recipe_id', '=', 'ing.ingredient_id')
-                ->whereIn('ing.product_id', [$productId]) // changed to an array with single value
-                ->update([
-                    'sl.remaining' => DB::raw('sl.remaining + (ing.Volume * ' . $qty . ')')
-                ]);
+                DB::table('product_tables as pt')
+                    ->join('ingredients_tables as ing', 'pt.id', '=', 'ing.product_id')
+                    ->join('supplier_lists as sl', 'sl.recipe_id', '=', 'ing.ingredient_id')
+                    ->where('ing.product_id', $productId)
+                    ->update([
+                        'sl.remaining' => DB::raw('sl.remaining + (ing.Volume * ' . $qty . ')')
+                    ]);
+            }
         }
 
+        // Step 4: Delete sales records and OR_List entries
         sales_records::whereIn('Or_id', $ORR)->delete();
         OR_List::whereIn('OrNumber', $ORArray)->delete();
 
         // Redirect back
         return back();
     }
+
+
 
     public function UpdateCategories(Request $request)
     {
