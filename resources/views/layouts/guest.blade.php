@@ -14,7 +14,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('build/assets/app-BQJ0Zvju.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('https://milk-tea-pos.vercel.app/build/assets/app-BQJ0Zvju.css') }}">
     <!-- Scripts -->
     <script src="{{ asset('build/assets/app-9mbrzSRH.js') }}" defer></script>
 </head>
@@ -35,7 +35,7 @@
 
 </html>
 <style>
-    body {
-            background-image: url('https://milk-tea-pos.vercel.app/images/login-background.jpg');
+     body {
+             background-image: url('/images/login-background.jpg');
         }
 </style>
