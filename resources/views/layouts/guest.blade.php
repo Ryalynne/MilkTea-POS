@@ -36,6 +36,6 @@
 </html>
 <style>
     body {
-        background-image: url('/images/login-background.jpg');
-    }
+            background-image: url('https://milk-tea-pos.vercel.app/images/login-background.jpg');
+        }
 </style>
