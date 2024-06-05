@@ -81,14 +81,16 @@
                                     <th class="border px-6 py-4">{{ $product->Product_Name }}</th>
                                     <td class="border px-6 py-4">   {{$product->Size}}</td>
                                     <td class="border px-6 py-4">
-                                  @if ($product->image)
-                                        echo "Generated image URL: " . Storage::disk('s3')->url($product->image);<img src="{{ Storage::disk('s3')->url($product->image) }}" alt="Product Image" style="height: 200px; width: 150px;">
-                                        <!--    <img src="{{ asset($product->Image) }}" alt="Product Image"
-                                                 style="height: 200px; width: 150px;"> -->
-                                        @else
-                                            <img src="{{ asset('uploads/category/1708225090.jpg') }}" alt="No Image"
-                                                 style="height: 200px; width: 150px;">
-                                        @endif
+                                    @if ($product->image)
+                                    <!-- Debugging: Output the generated image URL -->
+                                    Generated image URL: {{ Storage::disk('s3')->url($product->image) }}
+
+                                    <img src="{{ Storage::disk('s3')->url($product->image) }}" alt="Product Image" style="height: 200px; width: 150px;">
+                                    @else
+                                    <!-- Default image when product image doesn't exist -->
+                                    <img src="{{ asset('uploads/category/1708225090.jpg') }}" alt="No Image" style="height: 200px; width: 150px;">
+                                    @endif
+
                                     </td>
                                     <td class="border px-6 py-4">{{ $product->Product_Cetegories }}</td>
                                     <td class="border px-6 py-4">{{ implode(',', array_unique($recipeNames)) }}</td>
