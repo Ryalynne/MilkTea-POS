@@ -82,8 +82,7 @@
                                     <td class="border px-6 py-4">   {{$product->Size}}</td>
                                     <td class="border px-6 py-4">
                                     @if (!empty($product->Image))
-                                            <img src="{{ asset($product->Image) }}" alt="Product Image"
-                                                 style="height: 200px; width: 150px;">
+                                           <img src="{{ asset('uploads/category/' . $product->Image) }}" alt="Product Image" style="height: 200px; width: 150px;">
                                         @else
                                             <img src="{{ asset('uploads/category/1708225090.jpg') }}" alt="No Image"
                                                  style="height: 200px; width: 150px;">
