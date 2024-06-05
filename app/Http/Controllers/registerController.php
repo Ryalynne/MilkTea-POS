@@ -87,29 +87,13 @@ class registerController extends Controller
         $path = ''; // I-deklara ang $path variable bago ang 'if' statement
         if ($request->hasFile('Image')) {
             // Receive the uploaded file from the client
-$file = $request->file('Image');
-
-// Debugging: Output the received file
-dd($file); // This will print out the contents of $file, helping you verify if the file is being received correctly
-
-// Generate a unique filename
-$filename = time() . '.' . $file->getClientOriginalExtension();
-
-// Upload the file to the cloud storage service
-Storage::disk('s3')->put('uploads/category/' . $filename, file_get_contents($file));
-
-// Debugging: Output the uploaded file path
-echo "Uploaded file path: uploads/category/{$filename}";
-
-            
-            // Receive the uploaded file from the client
-          //  $file = $request->file('Image');
+            $file = $request->file('Image');
 
             // Generate a unique filename
-         //   $filename = time() . '.' . $file->getClientOriginalExtension();
+            $filename = time() . '.' . $file->getClientOriginalExtension();
 
             // Upload the file to the cloud storage service
-         //   Storage::disk('s3')->put('uploads/category/' . $filename, file_get_contents($file));
+            Storage::disk('s3')->put('uploads/category/' . $filename, file_get_contents($file));
 
             // Return a response to the client
             //$file = $request->file('Image');
