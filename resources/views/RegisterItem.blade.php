@@ -81,8 +81,8 @@
                                     <th class="border px-6 py-4">{{ $product->Product_Name }}</th>
                                     <td class="border px-6 py-4">   {{$product->Size}}</td>
                                     <td class="border px-6 py-4">
-                                        @if ($product->image)
-                                        <img src="{{ Storage::disk('s3')->url($product->image) }}" alt="Product Image" style="height: 200px; width: 150px;">
+                                  @if ($product->image)
+                                        echo "Generated image URL: " . Storage::disk('s3')->url($product->image);<img src="{{ Storage::disk('s3')->url($product->image) }}" alt="Product Image" style="height: 200px; width: 150px;">
                                         <!--    <img src="{{ asset($product->Image) }}" alt="Product Image"
                                                  style="height: 200px; width: 150px;"> -->
                                         @else
