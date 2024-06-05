@@ -83,7 +83,7 @@
                                     <td class="border px-6 py-4">
                                     @if (!empty($product->Image))
                                     <!-- Debugging: Output the generated image URL -->
-                                    <img src="{{ Storage::disk('s3')->url($product->image) }}" alt="Product Image" style="height: 200px; width: 150px;">
+                                    <img src="{{ Storage::disk('s3')->url($product->Image) }}" alt="Product Image" style="height: 200px; width: 150px;">
                                     @else
                                     <!-- Default image when product image doesn't exist -->
                                     <img src="{{ asset('uploads/category/1708225090.jpg') }}" alt="No Image" style="height: 200px; width: 150px;">
