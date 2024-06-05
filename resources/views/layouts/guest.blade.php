@@ -14,7 +14,6 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ secure_asset('build/assets/app-BQJ0Zvju.css') }}">
-    <link rel="stylesheet" href="{{ secure_asset('https://milk-tea-pos.vercel.app/build/assets/app-BQJ0Zvju.css') }}">
     <!-- Scripts -->
     <script src="{{ asset('build/assets/app-9mbrzSRH.js') }}" defer></script>
 </head>
