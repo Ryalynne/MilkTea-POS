@@ -96,7 +96,6 @@ class registerController extends Controller
             Storage::disk('s3')->put('uploads/category/' . $filename, file_get_contents($file));
 
             // Return a response to the client
-            return response()->json(['message' => 'File uploaded successfully', 'filename' => $filename]);
             //$file = $request->file('Image');
             //$extension = $file->guessExtension();
             //$filename = time() . '.' . $extension;
