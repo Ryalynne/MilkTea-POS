@@ -84,10 +84,11 @@ class registerController extends Controller
     {
         $path = ''; // I-deklara ang $path variable bago ang 'if' statement
         if ($request->hasFile('Image')) {
-        $file = $request->file('Image');
-    $extension = $file->getClientOriginalExtension();
-    $filename = time() . '.' . $extension;
-    $file->move(public_path('uploads/category'), $filename);
+            $file = $request->file('Image');
+            $extension = $file->guessExtension();
+            $filename = time() . '.' . $extension;
+            $path = '/uploads/category/';
+            $file->move($path, $filename);
         } else {
             $filename = ''; // I-deklara ang $filename variable kung walang file na na-upload
         }
