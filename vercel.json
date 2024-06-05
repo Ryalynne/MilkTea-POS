@@ -6,12 +6,20 @@
     },
     "routes": [
     {
-       "src": "/build/assets/(.*)",
-      "dest": "/public/build/assets/$1"
+        "src": "/uploads/category/(.*)",
+        "dest": "/public/uploads/category/"
+    },
+           {
+        "src": "/javascript/(.*)",
+        "dest": "/public/javascript/"
     },
     {
         "src": "/images/(.*)",
         "dest": "/public/images/"
+    },
+     {
+       "src": "/build/assets/(.*)",
+      "dest": "/public/build/assets/"
     },
     {
         "src": "/(.*)",

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
 use App\Models\brand_categories;
 use App\Models\ingredients_tables;
@@ -84,11 +84,23 @@ class registerController extends Controller
     {
         $path = ''; // I-deklara ang $path variable bago ang 'if' statement
         if ($request->hasFile('Image')) {
-            $file = $request->file('Image');
-            $extension = $file->guessExtension();
-            $filename = time() . '.' . $extension;
-            $path = 'uploads/category/';
-            $file->move($path, $filename);
+               // Receive the uploaded file from the client
+    $file = $request->file('Image');
+
+    // Generate a unique filename
+    $filename = time() . '.' . $file->getClientOriginalExtension();
+
+    // Upload the file to the cloud storage service
+    Storage::disk('s3')->put('uploads/category/' . $filename, file_get_contents($file));
+
+    // Return a response to the client
+    return response()->json(['message' => 'File uploaded successfully', 'filename' => $filename]);
+            //$file = $request->file('Image');
+            //$extension = $file->guessExtension();
+            //$filename = time() . '.' . $extension;
+            //$path = public_path('uploads/category/');
+            //$path = '/uploads/category/';
+           // $file->move($path, $filename);
         } else {
             $filename = ''; // I-deklara ang $filename variable kung walang file na na-upload
         }

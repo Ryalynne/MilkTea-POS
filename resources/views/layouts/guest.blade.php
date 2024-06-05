@@ -11,8 +11,12 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('build/assets/app-BQJ0Zvju.css ') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-CwW1cNLD.css ') }}">
     <script src="{{ asset('build/assets/app-9mbrzSRH.js') }}"></script>
+    <!--build on vercel-->
+    <!-- <link rel="stylesheet" href="{{ asset('build/assets/app-BQJ0Zvju.css ') }}"> -->
+    <!--build on laravel-->
+    
     
 </head>
 
