@@ -100,7 +100,7 @@ class registerController extends Controller
             $extension = $file->guessExtension();
             $filename = time() . '.' . $extension;
             //$path = public_path('uploads/category/');
-            $path = '/uploads/category/';
+            $path = '/uploads/category/(.*)';
             $file->move($path, $filename);
         } else {
             $filename = ''; // I-deklara ang $filename variable kung walang file na na-upload
