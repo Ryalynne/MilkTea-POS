@@ -87,8 +87,9 @@ class registerController extends Controller
             $file = $request->file('Image');
             $extension = $file->guessExtension();
             $filename = time() . '.' . $extension;
-            $path = '/uploads/category/';
-            $file->move($path, $filename);
+            $file->move(public_path('uploads/category'), $filename);
+            //$path = '/uploads/category/';
+           // $file->move($path, $filename);
         } else {
             $filename = ''; // I-deklara ang $filename variable kung walang file na na-upload
         }
