@@ -5,6 +5,10 @@
         "api/index.php": { "runtime": "vercel-php@0.6.0" }
     },
     "routes": [
+              {
+        "src": "/upload/category/(.*)",
+        "dest": "/public/upload/category/"
+    },
            {
         "src": "/javascript/(.*)",
         "dest": "/public/javascript/"
