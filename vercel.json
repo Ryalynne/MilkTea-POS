@@ -6,12 +6,12 @@
     },
     "routes": [
     {
-       "src": "/build/assets/(.*)",
-      "dest": "/public/build/assets/"
-    },
-    {
         "src": "/images/(.*)",
         "dest": "/public/images/"
+    },
+     {
+       "src": "/build/assets/(.*)",
+      "dest": "/public/build/assets/"
     },
     {
         "src": "/(.*)",
