@@ -14,7 +14,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <!-- Scripts -->
 
-    <link rel="stylesheet" href="{{ asset('build/assets/app-BQJ0Zvju.css ') }}">
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BQJ0Zvju.css') }}">
     <script src="{{ asset('build/assets/app-9mbrzSRH.js') }}"></script>
 
     {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
