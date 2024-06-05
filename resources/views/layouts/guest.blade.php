@@ -22,7 +22,7 @@
     <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
         <div>
             <a href="/">
-                <img src="./images/logo.jpg" class="w-20 h-20 fill-current">
+                <img src="/images/logo.jpg" class="w-20 h-20 fill-current">
             </a>
         </div>
 
