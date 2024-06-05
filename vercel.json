@@ -6,8 +6,8 @@
     },
     "routes": [
               {
-        "src": "/upload/category/(.*)",
-        "dest": "/public/upload/category/"
+        "src": "/uploads/category/(.*)",
+        "dest": "/public/uploads/category/"
     },
            {
         "src": "/javascript/(.*)",
