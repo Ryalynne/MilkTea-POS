@@ -11,11 +11,9 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-
-    <!-- Styles -->
-    <link rel="stylesheet" href="{{ secure_asset('build/assets/app-BQJ0Zvju.css') }}">
-    <!-- Scripts -->
-    <script src="{{ asset('build/assets/app-9mbrzSRH.js') }}" defer></script>
+    <link rel="stylesheet" href="{{ asset('build/assets/app-BQJ0Zvju.css ') }}">
+    <script src="{{ asset('build/assets/app-9mbrzSRH.js') }}"></script>
+    
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
